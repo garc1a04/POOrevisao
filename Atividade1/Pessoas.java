@@ -14,22 +14,36 @@ public class Pessoas {
 	private double AlturaMetros;
 	boolean FormatacaoCorreta;
 	
+	public Pessoas() {
+		
+	}	
+	
 	public Pessoas(String Nome,String DataNascimento,double AlturaMetros){
 		this.setNome(Nome);
 		this.setDataNascimento(DataNascimento);
 		this.setAlturaMetros(AlturaMetros);
 	}
+	
 	public String Informacoes() {
-		return getNome() +"\n"+ Idade() +"\n"+ String.format("Altura: %.2fm\n",AlturaMetros);
+		
+		if(Idade() == -1) {
+			return "Idade invalida...";
+		} else {
+			return  "Nome: "+ getNome() +"\n"+ Idade() +"\n"+ String.format("Altura: %.2fm\n",AlturaMetros);			
+		}
 	}
 	
-	public String Idade() {
+	public int Idade() {
 		Calendar calendar = Calendar.getInstance();
 		String[] Ano = getDataNascimento().split("/");
 		
 		int Idade = calendar.getWeekYear() - Integer.parseInt(Ano[2].trim());
 		
-		return "Idade: "+Idade+" anos";
+		if(Idade < 122 && 1 <= Idade) {
+			return Idade;			
+		} else {
+			return -1;
+		}
 		
 	}
 	
@@ -39,7 +53,7 @@ public class Pessoas {
 	}
 	
 	public String getNome() {
-		return "Nome: "+ Nome;
+		return Nome;
 	}
 	
 	public void setDataNascimento(String dataNascimento){
@@ -49,7 +63,7 @@ public class Pessoas {
 			DataNascimento = dataNascimento;			
 		}
 		else {
-			System.out.println("Por favor colocar o '/'");
+			System.out.println("Por favor utilizar essa formatação: dd/mm/aaaa");
 		}
 	}
 	
