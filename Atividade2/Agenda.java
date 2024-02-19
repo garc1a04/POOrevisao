@@ -16,13 +16,16 @@ import Atividades.primeiro.Pessoas;
 public class Agenda {
 	private List<Pessoas> ListaPerson = new ArrayList<>();
 	
-	public void armazenaPessoa(String nome, String DataNascimento, double altura) {
-		Pessoas Persons = new Pessoas(nome,DataNascimento,altura);
+	public void armazenaPessoa(String nome, int Idade, double altura) {
+		Pessoas Persons = new Pessoas(nome,Idade,altura);
 		
-		if(Persons.Informacoes().equals("Idade invalida...")) {
-			System.out.println("Impossivel Adicionar essa Pessoa");
+		if(ListaPerson.size() < 10) {
+			if(Persons.Informacoes().equals("Idade invalida..."))
+				System.out.println("Impossivel Adicionar essa Pessoa");
+			else
+				ListaPerson.add(Persons);						
 		} else {
-			ListaPerson.add(Persons);			
+			System.out.println("Lotou a Agenda...");
 		}
 		
 	}
@@ -49,14 +52,13 @@ public class Agenda {
 	}
 	
 	public void imprimeAgenda() {  // imprime os dados de todas as pessoas da agenda
-		
 		for(Pessoas Person: ListaPerson) {
 			System.out.println(Person.Informacoes());
 		}
 	}
+	
 	public void imprimePessoa(int index) { // imprime os dados da pessoa que está na posição “i” da agenda.
-		for(Pessoas Person: ListaPerson) {
-			System.out.println(Person.Informacoes());
-		}
+		System.out.println(ListaPerson.get(index).Informacoes());
+		
 	}
 }
